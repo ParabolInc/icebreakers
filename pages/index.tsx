@@ -33,10 +33,11 @@ const Icebreaker: NextPage<Props> = ({
     });
   };
   const handleCopyClick = () => {
+    const link = `${location.origin}/?id=${icebreaker.id}`
     const shareData = {
-      title: "Parabol",
-      text: "Check out this icebreaker!",
-      url: `${location.origin}/?id=${icebreaker.id}`,
+      title: "Check out this icebreaker on Parabol!",
+      text: link,
+      url: link,
     };
     if (navigator.canShare && navigator.canShare(shareData)) {
       navigator.share(shareData);
