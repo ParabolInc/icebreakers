@@ -1,13 +1,13 @@
 import type { NextApiRequest, NextApiResponse } from "next";
-import { allIcebreakers, generateRandomIcebreaker, Icebreaker } from "../../../lib/airtable";
+import { allIcebreakers, generateRandomIcebreaker, Icebreaker } from "../../../lib/api";
 
 type Data = {
   icebreaker: Icebreaker;
 } | { error: string };
 
-const randomIcebreaker = async (req: NextApiRequest, res: NextApiResponse<Data>) => {
+const randomIcebreaker = (_: NextApiRequest, res: NextApiResponse<Data>) => {
   try {
-    const icebreakers = await allIcebreakers();
+    const icebreakers = allIcebreakers();
     const icebreaker = generateRandomIcebreaker(icebreakers);
 
     res.status(200).json({ icebreaker });

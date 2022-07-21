@@ -11,7 +11,7 @@ import {
   allIcebreakers,
   generateRandomIcebreaker,
   Icebreaker,
-} from "../lib/airtable";
+} from "../lib/api";
 
 interface Props {
   icebreakers: Icebreaker[];
@@ -89,7 +89,8 @@ export const getServerSideProps: GetServerSideProps = async ({ res, query }) => 
     };
   }
 
-  const icebreaker = icebreakers.find((icebreaker) => icebreaker.id === query.id);
+  const icebreakerId = parseInt(query.id as string);
+  const icebreaker = icebreakers.find((icebreaker) => icebreaker.id === icebreakerId);
   if (icebreaker) {
     return {
       props: {
