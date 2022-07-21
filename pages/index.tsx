@@ -45,8 +45,13 @@ const Home: NextPage<Props> = ({ icebreakers, initialIcebreaker }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async () => {
+export const getServerSideProps: GetServerSideProps = async ({ res }) => {
   const icebreakers = await allIcebreakers();
+
+  res.setHeader(
+    'Cache-Control',
+    'public, s-maxage=60, stale-while-revalidate=59'
+  )
 
   return {
     props: {
