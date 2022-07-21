@@ -33,7 +33,7 @@ const Icebreaker: NextPage<Props> = ({
     });
   };
   const handleCopyClick = () => {
-    navigator.clipboard.writeText(`${location.href}/?id=${icebreaker.id}`);
+    navigator.clipboard.writeText(`${location.host}/?id=${icebreaker.id}`);
   }
   useHotkeys("space", handleGenerateClick);
 
