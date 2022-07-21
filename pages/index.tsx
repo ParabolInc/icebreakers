@@ -34,19 +34,18 @@ const Icebreaker: NextPage<Props> = ({
   };
   const handleCopyClick = () => {
     const shareData = {
-      title: 'Parabol',
-      text: 'Check out this icebreaker!',
+      title: "Parabol",
+      text: "Check out this icebreaker!",
       url: `${location.origin}/?id=${icebreaker.id}`,
-    }
+    };
     if (navigator.canShare && navigator.canShare(shareData)) {
-      navigator.clipboard.writeText(`${location.host}/?id=${icebreaker.id}`);
-
-      return
+      navigator.share(shareData);
+      return;
     }
 
     // fallback to just copy to clipboard
     navigator.clipboard.writeText(shareData.url);
-  }
+  };
   useHotkeys("space", handleGenerateClick);
 
   return (
@@ -69,12 +68,22 @@ const Icebreaker: NextPage<Props> = ({
               {icebreaker.question}
             </div>
             <div>
-              <Button className="bg-parabol text-white" onClick={handleGenerateClick}>{actionLabel}</Button>
+              <Button
+                className="bg-parabol text-white"
+                onClick={handleGenerateClick}
+              >
+                {actionLabel}
+              </Button>
               <div className="text-xs mt-2 text-center">or press space...</div>
             </div>
 
             <div>
-              <Button className="bg-white text-parabol border border-gray-200" onClick={handleCopyClick}>Copy this icebreaker URL</Button>
+              <Button
+                className="bg-white text-parabol border border-gray-200"
+                onClick={handleCopyClick}
+              >
+                Copy this icebreaker URL
+              </Button>
             </div>
           </div>
         </Card>
@@ -83,7 +92,10 @@ const Icebreaker: NextPage<Props> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ res, query }) => {
+export const getServerSideProps: GetServerSideProps = async ({
+  res,
+  query,
+}) => {
   const icebreakers = allIcebreakers();
 
   res.setHeader(
@@ -102,7 +114,9 @@ export const getServerSideProps: GetServerSideProps = async ({ res, query }) => 
   }
 
   const icebreakerId = parseInt(query.id as string);
-  const icebreaker = icebreakers.find((icebreaker) => icebreaker.id === icebreakerId);
+  const icebreaker = icebreakers.find(
+    (icebreaker) => icebreaker.id === icebreakerId
+  );
   if (icebreaker) {
     return {
       props: {
@@ -115,7 +129,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res, query }) => 
 
   return {
     notFound: true,
-  }
+  };
 };
 
 export default Icebreaker;
