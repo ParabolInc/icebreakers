@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { classNames } from '../lib/classnames';
+import { classNames } from '../lib/classNames';
 
 export const Button = React.forwardRef<
   HTMLButtonElement,
