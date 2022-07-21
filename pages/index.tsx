@@ -36,7 +36,7 @@ const Icebreaker: NextPage<Props> = ({
     const shareData = {
       title: 'Parabol',
       text: 'Check out this icebreaker!',
-      url: `${location.host}/?id=${icebreaker.id}`,
+      url: `${location.origin}/?id=${icebreaker.id}`,
     }
     if (navigator.canShare && navigator.canShare(shareData)) {
       navigator.clipboard.writeText(`${location.host}/?id=${icebreaker.id}`);
