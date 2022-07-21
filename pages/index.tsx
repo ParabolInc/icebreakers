@@ -1,23 +1,38 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import React from "react";
-import { useHotkeys } from 'react-hotkeys-hook'
+import { useRouter } from "next/router";
+import React, { startTransition } from "react";
+import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";
 import { Card } from "../components/card";
 import { Logo } from "../components/logo";
-import { allIcebreakers, generateRandomIcebreaker, Icebreaker } from "../lib/airtable";
+import { generateRandomActionLabel } from "../lib/actions";
+import {
+  allIcebreakers,
+  generateRandomIcebreaker,
+  Icebreaker,
+} from "../lib/airtable";
 
 interface Props {
   icebreakers: Icebreaker[];
   initialIcebreaker: Icebreaker;
+  initialActionLabel: string;
 }
 
-const Home: NextPage<Props> = ({ icebreakers, initialIcebreaker }) => {
+const Icebreaker: NextPage<Props> = ({
+  icebreakers,
+  initialIcebreaker,
+  initialActionLabel,
+}) => {
   const [icebreaker, setIcebreaker] = React.useState(initialIcebreaker);
-  const handleGenerateClick = async () => {
-    setIcebreaker(generateRandomIcebreaker(icebreakers));
-  }
-  useHotkeys('space', () => { handleGenerateClick() });
+  const [actionLabel, setActionLabel] = React.useState(initialActionLabel);
+  const handleGenerateClick = () => {
+    startTransition(() => {
+      setIcebreaker(generateRandomIcebreaker(icebreakers));
+      setActionLabel(generateRandomActionLabel());
+    });
+  };
+  useHotkeys("space", handleGenerateClick);
 
   return (
     <div className="h-full w-full">
@@ -29,13 +44,17 @@ const Home: NextPage<Props> = ({ icebreakers, initialIcebreaker }) => {
       <main className="h-full flex flex-col justify-center items-center">
         <Card>
           <div className="w-full p-8 flex items-center justify-center">
-            <Logo className="w-auto h-8" />
+            <a href="https://parabol.co" target="_blank" rel="noreferrer">
+              <Logo className="w-auto h-8" />
+            </a>
           </div>
 
           <div className="w-full p-8 flex flex-col items-center justify-center space-y-8">
-            <div className="text-xl min-h-[100px] flex items-center justify-center text-center">{icebreaker.question}</div>
+            <div className="text-xl min-h-[100px] flex items-center justify-center text-center px-8">
+              {icebreaker.question}
+            </div>
             <div>
-              <Button onClick={handleGenerateClick}>Generate</Button>
+              <Button onClick={handleGenerateClick}>{actionLabel}</Button>
               <div className="text-xs mt-2 text-center">or press space...</div>
             </div>
           </div>
@@ -45,20 +64,38 @@ const Home: NextPage<Props> = ({ icebreakers, initialIcebreaker }) => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ res, query }) => {
   const icebreakers = await allIcebreakers();
 
   res.setHeader(
-    'Cache-Control',
-    'public, s-maxage=60, stale-while-revalidate=59'
-  )
+    "Cache-Control",
+    "public, s-maxage=60, stale-while-revalidate=59"
+  );
+
+  if (!query.id) {
+    return {
+      props: {
+        icebreakers,
+        initialIcebreaker: generateRandomIcebreaker(icebreakers),
+        initialActionLabel: generateRandomActionLabel(),
+      },
+    };
+  }
+
+  const icebreaker = icebreakers.find((icebreaker) => icebreaker.id === query.id);
+  if (icebreaker) {
+    return {
+      props: {
+        icebreakers,
+        initialIcebreaker: icebreaker,
+        initialActionLabel: generateRandomActionLabel(),
+      },
+    };
+  }
 
   return {
-    props: {
-      icebreakers,
-      initialIcebreaker: generateRandomIcebreaker(icebreakers)
-    },
-  };
+    notFound: true,
+  }
 };
 
-export default Home;
+export default Icebreaker;
