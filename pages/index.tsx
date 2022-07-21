@@ -1,6 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import React, { startTransition } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";

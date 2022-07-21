@@ -12,6 +12,8 @@ body {
   font-size: 100%;
   color: #493272;
   background-color: #f1f0fa;
+  background-image: url('/img/background.svg');
+  background-size: cover;
 }
 
 #__next {
