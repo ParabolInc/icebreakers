@@ -32,6 +32,9 @@ const Icebreaker: NextPage<Props> = ({
       setActionLabel(generateRandomActionLabel());
     });
   };
+  const handleCopyClick = () => {
+    navigator.clipboard.writeText(`${location.href}/?id=${icebreaker.id}`);
+  }
   useHotkeys("space", handleGenerateClick);
 
   return (
@@ -54,8 +57,12 @@ const Icebreaker: NextPage<Props> = ({
               {icebreaker.question}
             </div>
             <div>
-              <Button onClick={handleGenerateClick}>{actionLabel}</Button>
+              <Button className="bg-parabol text-white" onClick={handleGenerateClick}>{actionLabel}</Button>
               <div className="text-xs mt-2 text-center">or press space...</div>
+            </div>
+
+            <div>
+              <Button className="bg-white text-parabol border border-gray-200" onClick={handleCopyClick}>Copy this icebreaker URL</Button>
             </div>
           </div>
         </Card>
