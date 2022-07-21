@@ -29,7 +29,7 @@ const Home: NextPage<Props> = ({ icebreakers, initialIcebreaker }) => {
       <main className="h-full flex flex-col justify-center items-center">
         <Card>
           <div className="w-full p-8 flex items-center justify-center">
-            <Logo className="w-auto h-14" />
+            <Logo className="w-auto h-8" />
           </div>
 
           <div className="w-full p-8 flex flex-col items-center justify-center space-y-8">
