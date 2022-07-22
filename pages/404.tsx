@@ -1,14 +1,30 @@
+import { NextSeo } from "next-seo";
 import Link from "next/link";
+import { SEO_CONFIG } from ".";
 import { Logo } from "../components/logo";
 
-/* This example requires Tailwind CSS v2.0+ */
 const NotFound = () => {
   return (
     <div className="min-h-full pt-16 pb-12 flex flex-col bg-white">
+      <NextSeo
+        title={SEO_CONFIG.title}
+        description={SEO_CONFIG.description}
+        canonical={SEO_CONFIG.canonical}
+        twitter={{
+          handle: "@parabol",
+          cardType: "summary_large_image",
+        }}
+      />
+
       <main className="flex-grow flex flex-col justify-center max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex-shrink-0 flex justify-center">
-          <a href="https://parabol.co" className="inline-flex" target="_blank" rel="noreferrer">
-            <Logo className="w-auto h-8"/>
+          <a
+            href="https://parabol.co"
+            className="inline-flex"
+            target="_blank"
+            rel="noreferrer"
+          >
+            <Logo className="w-auto h-8" />
           </a>
         </div>
         <div className="py-16">
@@ -23,12 +39,10 @@ const NotFound = () => {
               Sorry, we could not find the page you are looking for.
             </p>
             <div className="mt-6">
-              <Link
-                href="/"
-                className="text-base font-medium"
-                passHref
-              >
-                <a>Go back home<span aria-hidden="true"> &rarr;</span></a>
+              <Link href="/" className="text-base font-medium" passHref>
+                <a>
+                  Go back home<span aria-hidden="true"> &rarr;</span>
+                </a>
               </Link>
             </div>
           </div>
@@ -38,4 +52,4 @@ const NotFound = () => {
   );
 };
 
-export default NotFound
+export default NotFound;

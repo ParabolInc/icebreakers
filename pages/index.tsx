@@ -1,5 +1,5 @@
 import type { GetServerSideProps, NextPage } from "next";
-import Head from "next/head";
+import { NextSeo } from "next-seo";
 import React, { startTransition } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";
@@ -11,6 +11,12 @@ import {
   generateRandomIcebreaker,
   Icebreaker,
 } from "../lib/api";
+
+export const SEO_CONFIG = {
+  title: "Parabol | Icebreakers",
+  description: "Generate random meeting icebreakers",
+  canonical: process.env.PUBLIC_URL,
+}
 
 interface Props {
   icebreakers: Icebreaker[];
@@ -32,7 +38,7 @@ const Icebreaker: NextPage<Props> = ({
     });
   };
   const handleCopyClick = () => {
-    const link = `${location.origin}/?id=${icebreaker.id}`
+    const link = `${location.origin}/?id=${icebreaker.id}`;
     const shareData = {
       title: "Check out this icebreaker on Parabol!",
       url: link,
@@ -49,11 +55,37 @@ const Icebreaker: NextPage<Props> = ({
 
   return (
     <div className="h-full w-full">
-      <Head>
-        <title>Parabol | Icebreakers</title>
-        <meta name="description" content="Generate random icebreakers" />
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+      <NextSeo
+        title={SEO_CONFIG.title}
+        description={SEO_CONFIG.description}
+        canonical={SEO_CONFIG.canonical}
+        openGraph={{
+          url: SEO_CONFIG.canonical,
+          title: SEO_CONFIG.title,
+          description: SEO_CONFIG.description,
+          images: [
+            {
+              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=1200&height=630`,
+              width: 1200,
+              height: 630,
+              alt: `${icebreaker.question} image`,
+              type: "image/png",
+            },
+            {
+              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=900&height=800`,
+              width: 2000,
+              height: 1000,
+              alt: `${icebreaker.question} image`,
+              type: "image/png",
+            },
+          ],
+          site_name: SEO_CONFIG.title,
+        }}
+        twitter={{
+          handle: "@parabol",
+          cardType: "summary_large_image",
+        }}
+      />
       <main className="h-full flex flex-col justify-center items-center">
         <Card>
           <div className="w-full p-8 flex items-center justify-center">
