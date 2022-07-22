@@ -140,10 +140,6 @@ export const Body: React.FC<PropsWithChildren> = ({ children, ...rest }) => {
   );
 };
 
-export const Space = ({ size = 1 }: { size?: number }) => {
-  return <div style={{ height: size * spacing }} />;
-};
-
 export function renderHTML({ content }: { content: string }) {
   return ReactDOMServer.renderToStaticMarkup(
     <Html lang="en">
