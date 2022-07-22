@@ -1,5 +1,5 @@
-interface Props  {
-  className?: string
+interface Props {
+  className?: string;
 }
 
 export const Mark = ({ className }: Props) => {
@@ -16,4 +16,4 @@ export const Mark = ({ className }: Props) => {
       ></path>
     </svg>
   );
-}
+};

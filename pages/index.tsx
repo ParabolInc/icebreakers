@@ -55,7 +55,7 @@ const Icebreaker: NextPage<Props> = ({
   useHotkeys("space", handleGenerateClick);
 
   return (
-    <div className="h-full w-full flex">
+    <main className="flex h-full min-h-0 w-full flex-col">
       <NextSeo
         title={SEO_CONFIG.title}
         description={SEO_CONFIG.description}
@@ -87,54 +87,54 @@ const Icebreaker: NextPage<Props> = ({
           cardType: "summary_large_image",
         }}
       />
-      <main className="w-full my-auto sm:p-4">
-        <Card className="mx-auto">
-          <div className="p-6 sm:p-8 flex items-center justify-center">
-            <a href="https://parabol.co" target="_blank" rel="noreferrer">
-              <Logo className="w-auto h-6 sm:h-8" />
-            </a>
+      <header className="flex-1" />
+
+      <Card className="m-auto">
+        <div className="flex items-center justify-center p-6 sm:p-8">
+          <a href="https://parabol.co" target="_blank" rel="noreferrer">
+            <Logo className="h-6 w-auto sm:h-8" />
+          </a>
+        </div>
+
+        <div className="flex w-full flex-col items-center justify-center space-y-8 p-8">
+          <div className="flex min-h-[170px] items-center justify-center px-4 text-center text-xl sm:min-h-[100px] sm:px-8">
+            {icebreaker.question}
+          </div>
+          <div>
+            <Button
+              className="bg-parabol text-white"
+              onClick={handleGenerateClick}
+            >
+              {actionLabel}
+            </Button>
+            <div className="mt-2 text-center text-xs">or press space...</div>
           </div>
 
-          <div className="w-full p-8 flex flex-col items-center justify-center space-y-8">
-            <div className="text-xl min-h-[100px] flex items-center justify-center text-center px-8">
-              {icebreaker.question}
-            </div>
-            <div>
-              <Button
-                className="bg-parabol text-white"
-                onClick={handleGenerateClick}
-              >
-                {actionLabel}
-              </Button>
-              <div className="text-xs mt-2 text-center">or press space...</div>
-            </div>
-
-            <div>
-              <Button
-                className="bg-white text-parabol border border-gray-200"
-                onClick={handleCopyClick}
-              >
-                Copy this icebreaker URL
-              </Button>
-            </div>
+          <div>
+            <Button
+              className="border border-gray-200 bg-white text-parabol"
+              onClick={handleCopyClick}
+            >
+              Copy this icebreaker URL
+            </Button>
           </div>
-        </Card>
-        <div className="flex justify-center h-full">
+        </div>
+      </Card>
+
+      <footer className="mt-4 flex flex-1 justify-center">
         <a
-          className="m-8 gap-2 text-center inline-flex flex-col sm:flex-row items-center justify-center text-white group"
+          className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
           target="_blank"
           href="https://parabol.co"
           rel="noreferrer"
         >
           <Mark className="h-5 w-auto group-hover:animate-spin" />
-          <span className="mt-auto text-sm underline">
+          <span className="text-sm underline">
             Help your team connect & improve with an agile meeting co-pilot
           </span>
         </a>
-        </div>
-
-      </main>
-    </div>
+      </footer>
+    </main>
   );
 };
 

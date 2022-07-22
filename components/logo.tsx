@@ -1,5 +1,5 @@
-interface Props  {
-  className?: string
+interface Props {
+  className?: string;
 }
 
 export const Logo = ({ className }: Props) => {
