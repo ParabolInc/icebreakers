@@ -10,11 +10,11 @@ export const color = `#fff`;
 export const spacing = 16;
 export const maxWidth = 600;
 export const h1fontSize = 40;
-export const h2fontSize = 20;
+export const h2fontSize = 28;
 export const fontSize = 16;
 
 const baseStyles = `
-  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@500&display=swap');
 
   /**
    * Avoid browser level font resizing.
@@ -166,7 +166,7 @@ export function renderHTML({ content }: { content: string }) {
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
-              padding: spacing * 4,
+              padding: spacing * 3,
               backgroundColor: "white",
               color: parabolColor,
               borderRadius: spacing,
@@ -176,8 +176,8 @@ export function renderHTML({ content }: { content: string }) {
             <h2
               style={{
                 fontSize: h2fontSize,
-                marginLeft: spacing,
-                fontWeight: 400,
+                fontWeight: 500,
+                textAlign: "center",
               }}
             >
               {content}
