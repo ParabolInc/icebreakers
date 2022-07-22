@@ -1,6 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
-import React, { startTransition } from "react";
+import React, { startTransition, useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";
 import { Card } from "../components/card";
@@ -32,12 +32,12 @@ const Icebreaker: NextPage<Props> = ({
 }) => {
   const [icebreaker, setIcebreaker] = React.useState(initialIcebreaker);
   const [actionLabel, setActionLabel] = React.useState(initialActionLabel);
-  const handleGenerateClick = () => {
+  const handleGenerateClick = useCallback(() => {
     startTransition(() => {
       setIcebreaker(generateRandomIcebreaker(icebreakers));
       setActionLabel(generateRandomActionLabel());
     });
-  };
+  }, [icebreakers]);
   const handleCopyClick = () => {
     const link = `${location.origin}/?id=${icebreaker.id}`;
     const shareData = {
@@ -52,7 +52,7 @@ const Icebreaker: NextPage<Props> = ({
     // fallback to just copy to clipboard
     navigator.clipboard.writeText(shareData.url);
   };
-  useHotkeys("space", handleGenerateClick);
+  useHotkeys("space", handleGenerateClick, { keyup: true }, [handleGenerateClick]);
 
   return (
     <main className="flex h-full min-h-0 w-full flex-col">
