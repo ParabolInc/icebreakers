@@ -5,6 +5,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";
 import { Card } from "../components/card";
 import { Logo } from "../components/logo";
+import { Mark } from "../components/mark";
 import { generateRandomActionLabel } from "../lib/actions";
 import {
   allIcebreakers,
@@ -16,7 +17,7 @@ export const SEO_CONFIG = {
   title: "Parabol | Icebreakers",
   description: "Generate random meeting icebreakers",
   canonical: process.env.PUBLIC_URL,
-}
+};
 
 interface Props {
   icebreakers: Icebreaker[];
@@ -54,7 +55,7 @@ const Icebreaker: NextPage<Props> = ({
   useHotkeys("space", handleGenerateClick);
 
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full flex">
       <NextSeo
         title={SEO_CONFIG.title}
         description={SEO_CONFIG.description}
@@ -86,11 +87,11 @@ const Icebreaker: NextPage<Props> = ({
           cardType: "summary_large_image",
         }}
       />
-      <main className="h-full flex flex-col justify-center items-center">
-        <Card>
-          <div className="w-full p-8 flex items-center justify-center">
+      <main className="w-full my-auto sm:p-4">
+        <Card className="mx-auto">
+          <div className="p-6 sm:p-8 flex items-center justify-center">
             <a href="https://parabol.co" target="_blank" rel="noreferrer">
-              <Logo className="w-auto h-8" />
+              <Logo className="w-auto h-6 sm:h-8" />
             </a>
           </div>
 
@@ -118,6 +119,20 @@ const Icebreaker: NextPage<Props> = ({
             </div>
           </div>
         </Card>
+        <div className="flex justify-center h-full">
+        <a
+          className="m-8 gap-2 text-center inline-flex flex-col sm:flex-row items-center justify-center text-white group"
+          target="_blank"
+          href="https://parabol.co"
+          rel="noreferrer"
+        >
+          <Mark className="h-5 w-auto group-hover:animate-spin" />
+          <span className="mt-auto text-sm underline">
+            Help your team connect & improve with an agile meeting co-pilot
+          </span>
+        </a>
+        </div>
+
       </main>
     </div>
   );

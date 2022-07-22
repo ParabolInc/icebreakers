@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
+    "clsx": "^1.2.1",
     "next": "12.2.2",
     "next-seo": "^5.5.0",
     "puppeteer-core": "^15.5.0",

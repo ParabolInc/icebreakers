@@ -1,4 +1,8 @@
-export const Logo = ({ className }: { className?: string }) => {
+interface Props  {
+  className?: string
+}
+
+export const Logo = ({ className }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
