@@ -13,7 +13,7 @@ export const Button = React.forwardRef<
       <button
         ref={ref}
         className={clsx(
-          "inline-flex items-center rounded-full px-6 py-3 text-base font-medium shadow-sm hover:brightness-125 focus:outline-none focus:ring-2 focus:ring-parabol focus:ring-offset-2",
+          "inline-flex items-center rounded-full px-6 py-3 text-base font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-parabol focus:ring-offset-2",
           className
         )}
         {...otherProps}

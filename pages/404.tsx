@@ -1,7 +1,7 @@
 import { NextSeo } from "next-seo";
 import Link from "next/link";
-import { SEO_CONFIG } from ".";
 import { Logo } from "../components/logo";
+import { SEO_CONFIG } from "../lib/seo/config";
 
 const NotFound = () => {
   return (

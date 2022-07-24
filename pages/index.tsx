@@ -1,5 +1,6 @@
 import type { GetServerSideProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
 import React, { startTransition, useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Button } from "../components/button";
@@ -12,12 +13,7 @@ import {
   generateRandomIcebreaker,
   Icebreaker,
 } from "../lib/api";
-
-export const SEO_CONFIG = {
-  title: "Parabol | Icebreakers",
-  description: "Generate random meeting icebreakers",
-  canonical: process.env.PUBLIC_URL,
-};
+import { SEO_CONFIG } from "../lib/seo/config";
 
 interface Props {
   icebreakers: Icebreaker[];
@@ -30,14 +26,18 @@ const Icebreaker: NextPage<Props> = ({
   initialIcebreaker,
   initialActionLabel,
 }) => {
+  const router = useRouter();
   const [icebreaker, setIcebreaker] = React.useState(initialIcebreaker);
   const [actionLabel, setActionLabel] = React.useState(initialActionLabel);
+  
   const handleGenerateClick = useCallback(() => {
     startTransition(() => {
       setIcebreaker(generateRandomIcebreaker(icebreakers));
       setActionLabel(generateRandomActionLabel());
     });
   }, [icebreakers]);
+  useHotkeys("space", handleGenerateClick, { keyup: true }, [handleGenerateClick]);
+
   const handleCopyClick = () => {
     const link = `${location.origin}/?id=${icebreaker.id}`;
     const shareData = {
@@ -51,8 +51,8 @@ const Icebreaker: NextPage<Props> = ({
 
     // fallback to just copy to clipboard
     navigator.clipboard.writeText(shareData.url);
+    router.replace(`/?id=${icebreaker.id}`, undefined, { shallow: true })
   };
-  useHotkeys("space", handleGenerateClick, { keyup: true }, [handleGenerateClick]);
 
   return (
     <main className="flex h-full min-h-0 w-full flex-col">
@@ -102,7 +102,7 @@ const Icebreaker: NextPage<Props> = ({
           </div>
           <div>
             <Button
-              className="bg-parabol text-white"
+              className="bg-parabol text-white hover:brightness-125"
               onClick={handleGenerateClick}
             >
               {actionLabel}
@@ -112,7 +112,7 @@ const Icebreaker: NextPage<Props> = ({
 
           <div>
             <Button
-              className="border border-gray-200 bg-white text-parabol"
+              className="border border-gray-200 hover:border-gray-300 bg-white text-parabol"
               onClick={handleCopyClick}
             >
               Copy this icebreaker URL
@@ -146,7 +146,7 @@ export const getServerSideProps: GetServerSideProps = async ({
 
   res.setHeader(
     "Cache-Control",
-    "public, s-maxage=60, stale-while-revalidate=59"
+    "public, s-maxage=60, stale-while-revalidate=60"
   );
 
   if (!query.id) {
