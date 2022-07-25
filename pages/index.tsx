@@ -1,45 +1,44 @@
-import type { GetServerSideProps, NextPage } from "next";
+import type {
+  GetServerSideProps,
+  NextPage,
+} from "next";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import React, { startTransition, useCallback } from "react";
+import React, { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
-import { Button } from "../components/button";
-import { Card } from "../components/card";
-import { Logo } from "../components/logo";
-import { Mark } from "../components/mark";
+import { Card } from "../components/Card";
+import { IcebreakerGenerator } from "../components/IcebreakerGenerator";
+import { Mark } from "../components/Mark";
 import { generateRandomActionLabel } from "../lib/actions";
 import {
   allIcebreakers,
   generateRandomIcebreaker,
   Icebreaker,
 } from "../lib/api";
+import { SSR_CACHE_CONFIG } from "../lib/cache";
 import { SEO_CONFIG } from "../lib/seo/config";
 
 interface Props {
-  icebreakers: Icebreaker[];
-  initialIcebreaker: Icebreaker;
-  initialActionLabel: string;
+  allIcebreakers: Icebreaker[];
+  currentIcebreaker: Icebreaker;
+  actionLabel: string;
 }
 
 const Icebreaker: NextPage<Props> = ({
-  icebreakers,
-  initialIcebreaker,
-  initialActionLabel,
+  allIcebreakers,
+  currentIcebreaker,
+  actionLabel,
 }) => {
   const router = useRouter();
-  const [icebreaker, setIcebreaker] = React.useState(initialIcebreaker);
-  const [actionLabel, setActionLabel] = React.useState(initialActionLabel);
-  
   const handleGenerateClick = useCallback(() => {
-    startTransition(() => {
-      setIcebreaker(generateRandomIcebreaker(icebreakers));
-      setActionLabel(generateRandomActionLabel());
-    });
-  }, [icebreakers]);
-  useHotkeys("space", handleGenerateClick, { keyup: true }, [handleGenerateClick]);
-
-  const handleCopyClick = () => {
-    const link = `${location.origin}/?id=${icebreaker.id}`;
+    const icebreaker = generateRandomIcebreaker(allIcebreakers);
+    router.replace(`/?id=${icebreaker.id}`);
+  }, [allIcebreakers, router]);
+  useHotkeys("space", handleGenerateClick, { keyup: true }, [
+    handleGenerateClick,
+  ]);
+  const handleCopyUrlClick = () => {
+    const link = `${process.env.NEXT_PUBLIC_URL}/?id=${currentIcebreaker.id}`;
     const shareData = {
       title: "Check out this icebreaker on Parabol!",
       url: link,
@@ -51,7 +50,9 @@ const Icebreaker: NextPage<Props> = ({
 
     // fallback to just copy to clipboard
     navigator.clipboard.writeText(shareData.url);
-    router.replace(`/?id=${icebreaker.id}`, undefined, { shallow: true })
+    router.replace(`/?id=${currentIcebreaker.id}`, undefined, {
+      shallow: true,
+    });
   };
 
   return (
@@ -66,17 +67,17 @@ const Icebreaker: NextPage<Props> = ({
           description: SEO_CONFIG.description,
           images: [
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=1200&height=630`,
+              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${currentIcebreaker.id}&width=1200&height=630`,
               width: 1200,
               height: 630,
-              alt: `${icebreaker.question} image`,
+              alt: `${currentIcebreaker.question} image`,
               type: "image/png",
             },
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=2000&height=1000`,
+              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${currentIcebreaker.id}&width=2000&height=1000`,
               width: 2000,
               height: 1000,
-              alt: `${icebreaker.question} image`,
+              alt: `${currentIcebreaker.question} image`,
               type: "image/png",
             },
           ],
@@ -89,36 +90,13 @@ const Icebreaker: NextPage<Props> = ({
       />
       <header className="flex-1" />
 
-      <Card className="m-auto">
-        <div className="flex items-center justify-center p-6 sm:p-8">
-          <a href="https://parabol.co" target="_blank" rel="noreferrer">
-            <Logo className="h-6 w-auto sm:h-8" />
-          </a>
-        </div>
-
-        <div className="flex w-full flex-col items-center justify-center space-y-8 p-8">
-          <div className="flex min-h-[170px] items-center justify-center px-4 text-center text-xl sm:min-h-[100px] sm:px-8">
-            {icebreaker.question}
-          </div>
-          <div>
-            <Button
-              className="bg-parabol text-white hover:brightness-125"
-              onClick={handleGenerateClick}
-            >
-              {actionLabel}
-            </Button>
-            <div className="mt-2 text-center text-xs">or press space...</div>
-          </div>
-
-          <div>
-            <Button
-              className="border border-gray-200 hover:border-gray-300 bg-white text-parabol"
-              onClick={handleCopyClick}
-            >
-              Copy this icebreaker URL
-            </Button>
-          </div>
-        </div>
+      <Card className="m-auto w-full max-w-xl">
+        <IcebreakerGenerator
+          currentIcebreaker={currentIcebreaker}
+          actionLabel={actionLabel}
+          handleGenerateClick={handleGenerateClick}
+          handleCopyUrlClick={handleCopyUrlClick}
+        />
       </Card>
 
       <footer className="mt-4 flex flex-1 justify-center">
@@ -142,35 +120,33 @@ export const getServerSideProps: GetServerSideProps = async ({
   res,
   query,
 }) => {
+  res.setHeader("Cache-Control", SSR_CACHE_CONFIG);
+
   const icebreakers = allIcebreakers();
-
-  res.setHeader(
-    "Cache-Control",
-    "public, s-maxage=60, stale-while-revalidate=60"
-  );
-
   if (!query.id) {
+    const props: Props = {
+      allIcebreakers: icebreakers,
+      currentIcebreaker: generateRandomIcebreaker(icebreakers),
+      actionLabel: generateRandomActionLabel(),
+    };
+
     return {
-      props: {
-        icebreakers,
-        initialIcebreaker: generateRandomIcebreaker(icebreakers),
-        initialActionLabel: generateRandomActionLabel(),
-      },
+      props,
     };
   }
 
   const icebreakerId = parseInt(query.id as string);
-  const icebreaker = icebreakers.find(
+  const currentIcebreaker = icebreakers.find(
     (icebreaker) => icebreaker.id === icebreakerId
   );
-  if (icebreaker) {
-    return {
-      props: {
-        icebreakers,
-        initialIcebreaker: icebreaker,
-        initialActionLabel: generateRandomActionLabel(),
-      },
+  if (currentIcebreaker) {
+    const props: Props = {
+      allIcebreakers: icebreakers,
+      currentIcebreaker,
+      actionLabel: generateRandomActionLabel(),
     };
+
+    return { props };
   }
 
   return {

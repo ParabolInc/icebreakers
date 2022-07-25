@@ -10,12 +10,7 @@ export const Card: React.FC<React.PropsWithChildren<Props>> = ({
   className,
 }) => {
   return (
-    <div
-      className={clsx(
-        "flex w-full max-w-xl flex-col items-center justify-center divide-y bg-white shadow-xl sm:rounded-lg",
-        className
-      )}
-    >
+    <div className={clsx("bg-white shadow-xl sm:rounded-lg", className)}>
       {children}
     </div>
   );
