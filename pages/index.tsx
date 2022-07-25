@@ -73,7 +73,7 @@ const Icebreaker: NextPage<Props> = ({
               type: "image/png",
             },
             {
-              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=900&height=800`,
+              url: `${process.env.NEXT_PUBLIC_URL}/api/open-graph/?id=${icebreaker.id}&width=2000&height=1000`,
               width: 2000,
               height: 1000,
               alt: `${icebreaker.question} image`,
