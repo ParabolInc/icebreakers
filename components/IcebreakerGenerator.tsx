@@ -24,7 +24,7 @@ export const IcebreakerGenerator = ({
       </div>
 
       <div className="flex w-full flex-col items-center justify-center space-y-8 p-8">
-        <div className="flex min-h-[170px] items-center justify-center px-4 text-center text-xl sm:min-h-[100px] sm:px-8">
+        <div className="flex min-h-[170px] items-center justify-center px-4 text-center text-2xl sm:min-h-[100px] sm:px-8">
           {currentIcebreaker.question}
         </div>
         <div>
