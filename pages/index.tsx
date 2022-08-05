@@ -9,6 +9,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { Card } from "../components/Card";
 import { IcebreakerGenerator } from "../components/IcebreakerGenerator";
 import { Mark } from "../components/Mark";
+import { LinkIcon } from "../components/linkIcon";
 import { generateRandomActionLabel } from "../lib/actions";
 import {
   allIcebreakers,
@@ -98,6 +99,18 @@ const Icebreaker: NextPage<Props> = ({
           handleCopyUrlClick={handleCopyUrlClick}
         />
       </Card>
+      <div
+        className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
+      >
+          <a
+            className="text-sm underline mt-4 inline-block"
+            onClick={handleCopyUrlClick}
+            href="#"
+          >
+            <LinkIcon />
+            Copy this icebreaker URL
+          </a>
+        </div>
 
       <footer className="mt-4 flex flex-1 justify-center">
         <a

@@ -37,14 +37,7 @@ export const IcebreakerGenerator = ({
           <div className="mt-2 text-center text-xs">or press space...</div>
         </div>
 
-        <div>
-          <Button
-            className="border border-gray-200 bg-white text-parabol hover:border-gray-300"
-            onClick={handleCopyUrlClick}
-          >
-            Copy this icebreaker URL
-          </Button>
-        </div>
+        
       </div>
     </div>
   );
