@@ -8,6 +8,9 @@
     "start": "next start",
     "lint": "next lint"
   },
+  "lint-staged": {
+    "*": "yarn lint --fix"
+  },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
     "clsx": "^1.2.1",
@@ -26,6 +29,7 @@
     "eslint": "8.20.0",
     "eslint-config-next": "12.2.2",
     "eslint-config-prettier": "^8.5.0",
+    "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.12",

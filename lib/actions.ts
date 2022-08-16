@@ -10,4 +10,5 @@ const actionLabelLookup = [
   "The perfect icebreaker awaits",
 ];
 
-export const generateRandomActionLabel = () => actionLabelLookup[Math.floor(Math.random() * actionLabelLookup.length)]
+export const generateRandomActionLabel = () =>
+  actionLabelLookup[Math.floor(Math.random() * actionLabelLookup.length)];
