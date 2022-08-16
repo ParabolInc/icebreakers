@@ -6,10 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "prepare": "husky install"
   },
   "lint-staged": {
-    "*": "yarn lint --fix"
+    "*.{ts,tsx}": "yarn lint --fix"
   },
   "dependencies": {
     "chrome-aws-lambda": "^10.1.0",
@@ -34,6 +35,7 @@
     "prettier": "^2.7.1",
     "prettier-plugin-tailwindcss": "^0.1.12",
     "tailwindcss": "^3.1.6",
-    "typescript": "4.7.4"
+    "typescript": "4.7.4",
+    "husky": "^8.0.0"
   }
 }
