@@ -102,7 +102,6 @@ const Icebreaker: NextPage<Props> = ({
       <footer className="mt-4 flex flex-1 justify-center">
         <a
           className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
-          target="_blank"
           href="https://parabol.co"
         >
           <Mark className="h-5 w-auto group-hover:animate-spin" />
