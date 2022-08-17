@@ -104,7 +104,7 @@ const Icebreaker: NextPage<Props> = ({
         className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
       >
           <Button
-            className="text-sm mt-4 inline-block hover:underline focus:ring-2 focus:ring-offset-0"
+            className="text-sm mt-4 inline-block hover:underline focus:ring-2 focus:ring-offset-0 shadow-none"
             onClick={handleCopyUrlClick}
           >
             <LinkIcon className="h-4 w-4 inline-block mr-2"/>
