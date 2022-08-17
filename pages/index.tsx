@@ -18,6 +18,7 @@ import {
 } from "../lib/api";
 import { SSR_CACHE_CONFIG } from "../lib/cache";
 import { SEO_CONFIG } from "../lib/seo/config";
+import { Button } from "../components/Button";
 
 interface Props {
   allIcebreakers: Icebreaker[];
@@ -102,14 +103,13 @@ const Icebreaker: NextPage<Props> = ({
       <div
         className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
       >
-          <a
-            className="text-sm underline mt-4 inline-block"
+          <Button
+            className="text-sm mt-4 inline-block hover:underline focus:ring-2 focus:ring-offset-0"
             onClick={handleCopyUrlClick}
-            href="#"
           >
             <LinkIcon className="h-4 w-4 inline-block mr-2"/>
             Copy this icebreaker URL
-          </a>
+          </Button>
         </div>
 
       <footer className="mt-4 flex flex-1 justify-center">
