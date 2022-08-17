@@ -1,20 +1,22 @@
-import chrome from 'chrome-aws-lambda';
+import chrome from "chrome-aws-lambda";
 
-const WindowsChromePath = 'C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe';
-const LinuxChromePath = '/usr/bin/google-chrome';
-const MacOSChromePath = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome';
+const WindowsChromePath =
+  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe";
+const LinuxChromePath = "/usr/bin/google-chrome";
+const MacOSChromePath =
+  "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
 const exePath =
-  process.platform === 'win32'
+  process.platform === "win32"
     ? WindowsChromePath
-    : process.platform === 'linux'
+    : process.platform === "linux"
     ? LinuxChromePath
     : MacOSChromePath;
 
 export async function getOptions() {
   let options;
 
-  const isProduction = process.env.NODE_ENV === 'production';
+  const isProduction = process.env.NODE_ENV === "production";
   if (!isProduction) {
     options = {
       args: [],

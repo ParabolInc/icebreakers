@@ -986,7 +986,7 @@ const icebreakers: Icebreaker[] = [
   },
 ];
 
-export const allIcebreakers= (): Icebreaker[] => icebreakers;
+export const allIcebreakers = (): Icebreaker[] => icebreakers;
 
 export const generateRandomIcebreaker = (icebreakers: Icebreaker[]) => {
   return icebreakers[Math.floor(Math.random() * icebreakers.length)];
