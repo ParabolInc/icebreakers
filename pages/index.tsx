@@ -100,7 +100,7 @@ const Icebreaker: NextPage<Props> = ({
         />
       </Card>
       <div
-        className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
+        className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
       >
           <a
             className="text-sm underline mt-4 inline-block"
