@@ -30,7 +30,6 @@ export const IcebreakerGenerator = ({
         <div>
           <Button
             className="bg-parabol text-white hover:brightness-125"
-            onClick={handleGenerateClick}
           >
             {actionLabel}
           </Button>
