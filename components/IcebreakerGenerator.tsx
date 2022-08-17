@@ -6,14 +6,12 @@ interface Props {
   currentIcebreaker: Icebreaker;
   actionLabel: string;
   handleGenerateClick: () => void;
-  handleCopyUrlClick: () => void;
 }
 
 export const IcebreakerGenerator = ({
   currentIcebreaker,
   actionLabel,
   handleGenerateClick,
-  handleCopyUrlClick,
 }: Props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center divide-y">
