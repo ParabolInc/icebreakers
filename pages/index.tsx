@@ -9,7 +9,7 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { Card } from "../components/Card";
 import { IcebreakerGenerator } from "../components/IcebreakerGenerator";
 import { Mark } from "../components/Mark";
-import { LinkIcon } from "../components/linkIcon";
+import { LinkIcon } from "../components/LinkIcon";
 import { generateRandomActionLabel } from "../lib/actions";
 import {
   allIcebreakers,
