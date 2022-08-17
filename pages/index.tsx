@@ -107,7 +107,7 @@ const Icebreaker: NextPage<Props> = ({
             onClick={handleCopyUrlClick}
             href="#"
           >
-            <LinkIcon />
+            <LinkIcon className="h-4 w-4 inline-block mr-2"/>
             Copy this icebreaker URL
           </a>
         </div>
