@@ -49,7 +49,6 @@ const Embed: NextPage<Props> = ({ initialIcebreaker, initialActionLabel }) => {
         currentIcebreaker={icebreaker}
         actionLabel={actionLabel}
         handleGenerateClick={handleGenerateClick}
-        handleCopyUrlClick={handleCopyUrlClick}
       />
     </div>
   );

@@ -97,7 +97,6 @@ const Icebreaker: NextPage<Props> = ({
           currentIcebreaker={currentIcebreaker}
           actionLabel={actionLabel}
           handleGenerateClick={handleGenerateClick}
-          handleCopyUrlClick={handleCopyUrlClick}
         />
       </Card>
       <div
