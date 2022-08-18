@@ -6,14 +6,12 @@ interface Props {
   currentIcebreaker: Icebreaker;
   actionLabel: string;
   handleGenerateClick: () => void;
-  handleCopyUrlClick: () => void;
 }
 
 export const IcebreakerGenerator = ({
   currentIcebreaker,
   actionLabel,
   handleGenerateClick,
-  handleCopyUrlClick,
 }: Props) => {
   return (
     <div className="flex w-full flex-col items-center justify-center divide-y">
@@ -37,14 +35,7 @@ export const IcebreakerGenerator = ({
           <div className="mt-2 text-center text-xs">or press space...</div>
         </div>
 
-        <div>
-          <Button
-            className="border border-gray-200 bg-white text-parabol hover:border-gray-300"
-            onClick={handleCopyUrlClick}
-          >
-            Copy this icebreaker URL
-          </Button>
-        </div>
+        
       </div>
     </div>
   );
