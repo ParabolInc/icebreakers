@@ -6,11 +6,12 @@ const CACHE_CONTROL_HEADER = {
   value: `public, max-age=${ONE_YEAR_SECONDS}, immutable`,
 };
 const ContentSecurityPolicy = `
-  default-src 'self';
-  script-src 'self';
-  child-src parabol.co vercel.app;
-  style-src 'unsafe-inline' 'self' parabol.co vercel.app;
-  font-src 'self';  
+  default-src * 'unsafe-inline' 'unsafe-eval';
+  script-src * 'unsafe-inline' 'unsafe-eval';
+  connect-src * 'unsafe-inline';
+  img-src * data: blob: 'unsafe-inline';
+  frame-src *;
+  style-src * 'unsafe-inline';
 `;
 const SECURITY_HEADERS = [
   {
