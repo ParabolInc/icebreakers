@@ -9,7 +9,7 @@ const ContentSecurityPolicy = `
   default-src 'self';
   script-src 'self';
   child-src parabol.co vercel.app;
-  style-src 'self' parabol.co vercel.app;
+  style-src 'unsafe-inline' 'self' parabol.co vercel.app;
   font-src 'self';  
 `;
 const SECURITY_HEADERS = [
