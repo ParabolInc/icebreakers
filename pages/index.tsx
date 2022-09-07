@@ -1,13 +1,13 @@
-import type {
-  GetServerSideProps,
-  NextPage,
-} from "next";
+import type { GetServerSideProps, NextPage } from "next";
 import { NextSeo } from "next-seo";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useCallback } from "react";
 import { useHotkeys } from "react-hotkeys-hook";
 import { Card } from "../components/Card";
 import { IcebreakerGenerator } from "../components/IcebreakerGenerator";
+import { GitHub } from "../components/icons/GitHub";
+import { Zoom } from "../components/icons/Zoom";
 import { Mark } from "../components/Mark";
 import { LinkIcon } from "../components/LinkIcon";
 import { generateRandomActionLabel } from "../lib/actions";
@@ -99,28 +99,49 @@ const Icebreaker: NextPage<Props> = ({
           handleGenerateClick={handleGenerateClick}
         />
       </Card>
-      <div
-        className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
-      >
-          <Button
-            className="text-sm mt-4 inline-block hover:underline focus:ring-2 focus:ring-offset-0 shadow-none"
-            onClick={handleCopyUrlClick}
-          >
-            <LinkIcon className="h-4 w-4 inline-block mr-2"/>
-            Copy this icebreaker URL
-          </Button>
-        </div>
+      <div className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white">
+        <Button
+          className="mt-4 inline-block text-sm shadow-none hover:underline focus:ring-2 focus:ring-offset-0"
+          onClick={handleCopyUrlClick}
+        >
+          <LinkIcon className="mr-2 inline-block h-4 w-4" />
+          Copy this icebreaker URL
+        </Button>
+      </div>
 
       <footer className="mt-4 flex flex-1 justify-center">
-        <a
-          className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white"
-          href="https://parabol.co"
-        >
-          <Mark className="h-5 w-auto group-hover:animate-spin" />
-          <span className="text-sm underline">
+        <div className="group mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white">
+          <div className="flex gap-2">
+            <a
+              href="https://github.com/ParabolInc/icebreakers/"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <GitHub className="h-5 w-auto" />
+            </a>
+            <a
+              className="text-sm underline"
+              href="https://parabol.co"
+              target="_blank"
+              rel="noreferrer"
+            >
+              <Mark className="h-5 w-auto group-hover:animate-spin" />
+            </a>
+            <Link href="/api/zoom/install" passHref>
+              <a>
+                <Zoom className="h-5 w-auto" />
+              </a>
+            </Link>
+          </div>
+          <a
+            className="text-sm underline"
+            href="https://parabol.co"
+            target="_blank"
+            rel="noreferrer"
+          >
             Help your team connect & improve with an agile meeting co-pilot
-          </span>
-        </a>
+          </a>
+        </div>
       </footer>
     </main>
   );
