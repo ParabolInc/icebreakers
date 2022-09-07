@@ -10,7 +10,10 @@
     "prepare": "husky install"
   },
   "lint-staged": {
-    "*.{ts,tsx}": "yarn lint --fix"
+    "*.{ts,tsx}": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "dependencies": {
     "axios": "^0.27.2",
