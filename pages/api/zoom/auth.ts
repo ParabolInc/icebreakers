@@ -7,9 +7,9 @@ type Data = {
   error?: string;
 };
 
-export default withSessionRoute(loginRoute);
+export default withSessionRoute(authRoute);
 
-async function loginRoute(req: NextApiRequest, res: NextApiResponse<Data>) {
+async function authRoute(req: NextApiRequest, res: NextApiResponse<Data>) {
   req.session.state = null;
 
   console.log('========auth req.session========', req.session)
