@@ -18,7 +18,7 @@ export const IcebreakerGenerator = ({
   return (
     <div className="flex w-full flex-col items-center justify-center divide-y">
       <div className="flex items-center justify-center p-5 sm:p-6 sm:pt-7">
-        <a href=${PARABOL_URI}>
+        <a href={PARABOL_URI}>
           <Logo className="h-6 w-auto sm:h-8" />
         </a>
       </div>
