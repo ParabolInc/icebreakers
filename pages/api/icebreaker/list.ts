@@ -1,8 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import { allIcebreakers, Icebreaker } from "../../../lib/api";
 
-const cacheMaxAge = 60 * 60 * 1; // 1h
-
 type Data =
   | {
       icebreakers: Icebreaker[];

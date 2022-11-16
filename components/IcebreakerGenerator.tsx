@@ -1,8 +1,8 @@
 import { Button } from "./Button";
-import { Logo } from "./Logo";
+import { Logo } from "./LogoDark";
 import { Icebreaker } from "../lib/api";
 
-const PARABOL_URI = `https://www.parabol.co/?utm_campaign=icebreakers&utm_medium=icebreaker-app&utm_source=icebreaker-app`
+const PARABOL_URI = `https://www.parabol.co/?utm_campaign=icebreakers&utm_medium=icebreaker-app&utm_source=icebreaker-app`;
 
 interface Props {
   currentIcebreaker: Icebreaker;
@@ -36,8 +36,6 @@ export const IcebreakerGenerator = ({
           </Button>
           <div className="mt-2 text-center text-xs">or press space...</div>
         </div>
-
-        
       </div>
     </div>
   );
