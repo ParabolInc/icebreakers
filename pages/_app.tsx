@@ -8,7 +8,6 @@ const ibmPlexSans = IBM_Plex_Sans({
   subsets: ["latin"],
 });
 
-
 function IcebreakersApp({ Component, pageProps }: AppProps) {
   return (
     <>
