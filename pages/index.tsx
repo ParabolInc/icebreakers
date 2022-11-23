@@ -128,9 +128,7 @@ const Icebreaker: NextPage<Props> = ({
               <Mark className="h-5 w-auto group-hover:animate-spin" />
             </a>
             <Link href="/api/zoom/install" passHref>
-              <a>
-                <Zoom className="h-5 w-auto" />
-              </a>
+              <Zoom className="h-5 w-auto" />
             </Link>
           </div>
           <a

@@ -364,7 +364,7 @@ const icebreakers: Icebreaker[] = [
   {
     id: 82,
     question:
-      "You've died but instead of entering the afterlife, you've entered Earth 2.0. What is something that make Earth 2.0 better?",
+      "You've died but instead of entering the afterlife, you've entered Earth 2.0. What is something that makes Earth 2.0 better?",
   },
   {
     id: 83,
