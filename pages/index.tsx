@@ -19,6 +19,9 @@ import {
 import { SSR_CACHE_CONFIG } from "../lib/cache";
 import { SEO_CONFIG } from "../lib/seo/config";
 import { Button } from "../components/Button";
+import { Logo } from "../components/LogoDark";
+
+const PARABOL_URI = `https://www.parabol.co/?utm_campaign=icebreakers&utm_medium=icebreaker-app&utm_source=icebreaker-app`;
 
 interface Props {
   allIcebreakers: Icebreaker[];
@@ -92,13 +95,20 @@ const Icebreaker: NextPage<Props> = ({
       />
       <header className="flex-1" />
 
-      <Card className="m-auto w-full max-w-xl">
-        <IcebreakerGenerator
+      <Card className="m-auto w-full max-w-xl divide-y">
+        <div className="flex items-center justify-center p-5 sm:p-6 sm:pt-7">
+          <a href={PARABOL_URI}>
+            <Logo className="h-6 w-auto sm:h-8" />
+          </a>
+        </div>
+
+        <IcebreakerGenerator  
           currentIcebreaker={currentIcebreaker}
           actionLabel={actionLabel}
           handleGenerateClick={handleGenerateClick}
         />
       </Card>
+
       <div className="mx-4 mt-auto mb-4 inline-flex flex-col items-center justify-center gap-2 text-center text-white">
         <Button
           className="mt-4 inline-block text-sm shadow-none hover:underline focus:ring-2 focus:ring-offset-0"
