@@ -35,7 +35,7 @@ const Embed: NextPage<Props> = ({ initialIcebreaker, initialActionLabel }) => {
   ]);
 
   return (
-    <div className="flex h-full w-full bg-transparent p-4">
+    <div className="flex h-full w-full bg-[#f1f0f9] p-4">
       <NextSeo
         title={SEO_CONFIG.title}
         description={SEO_CONFIG.description}
