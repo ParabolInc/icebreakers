@@ -6,21 +6,15 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
-    "prepare": "husky install"
+    "lint": "next lint"
   },
   "lint-staged": {
-    "*.{ts,tsx}": [
-      "eslint --fix",
-      "git add"
-    ]
+    "*.{ts,tsx}": "yarn lint --fix"
   },
   "dependencies": {
     "@vercel/analytics": "^0.1.5",
     "@vercel/og": "^0.0.20",
-    "axios": "^0.27.2",
     "clsx": "^1.2.1",
-    "iron-session": "^6.2.0",
     "next": "^14.2.30",
     "next-seo": "^5.5.0",
     "react": "^18.2.0",
@@ -35,7 +29,6 @@
     "eslint": "8.20.0",
     "eslint-config-next": "^13.0.2",
     "eslint-config-prettier": "^8.5.0",
-    "husky": "^8.0.0",
     "lint-staged": "^13.0.3",
     "postcss": "^8.4.14",
     "prettier": "^2.7.1",
