@@ -7,7 +7,6 @@ import { useHotkeys } from "react-hotkeys-hook";
 import { Card } from "../components/Card";
 import { IcebreakerGenerator } from "../components/IcebreakerGenerator";
 import { GitHub } from "../components/icons/GitHub";
-import { Zoom } from "../components/icons/Zoom";
 import { Mark } from "../components/Mark";
 import { LinkIcon } from "../components/LinkIcon";
 import { generateRandomActionLabel } from "../lib/actions";
@@ -137,9 +136,6 @@ const Icebreaker: NextPage<Props> = ({
             >
               <Mark className="h-5 w-auto group-hover:animate-spin" />
             </a>
-            <Link href="/api/zoom/install" passHref>
-              <Zoom className="h-5 w-auto" />
-            </Link>
           </div>
           <a
             className="text-sm underline"
