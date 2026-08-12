@@ -10,11 +10,8 @@ import { GitHub } from "../components/icons/GitHub";
 import { Mark } from "../components/Mark";
 import { LinkIcon } from "../components/LinkIcon";
 import { generateRandomActionLabel } from "../lib/actions";
-import {
-  allIcebreakers,
-  generateRandomIcebreaker,
-  Icebreaker,
-} from "../lib/api";
+import type { Icebreaker } from "../lib/api";
+import { allIcebreakers, generateRandomIcebreaker } from "../lib/api";
 import { SSR_CACHE_CONFIG } from "../lib/cache";
 import { SEO_CONFIG } from "../lib/seo/config";
 import { Button } from "../components/Button";

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-text */
 import { NextRequest } from "next/server";
 import { allIcebreakers } from "../../../lib/api";
 
